@@ -9,7 +9,7 @@
     "zero": "./src/cli.js"
   },
   "scripts": {
-    "test": "node --test tests/*.test.js",
+    "test": "node --test",
     "bench": "node benchmarks/bench.js",
     "build": "node build.js",
     "verify": "node scripts/verify.js"
