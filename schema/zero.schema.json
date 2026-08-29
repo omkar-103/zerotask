@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZeroTask Configuration",
+  "description": "Schema for ZeroTask process orchestrator configuration files (zero.json)",
+  "type": "object",
+  "required": ["tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "URI of the JSON schema for validation"
+    },
+    "version": {
+      "type": "string",
+      "description": "Configuration format version",
+      "default": "1.0.0"
+    },
+    "defaultTimeout": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Global default timeout in milliseconds applied to tasks without explicit timeout"
+    },
+    "tasks": {
+      "type": "object",
+      "description": "Dictionary of tasks keyed by unique task identifier",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["command"],
+        "additionalProperties": false,
+        "properties": {
+          "command": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Shell command to execute"
+          },
+          "cwd": {
+            "type": "string",
+            "description": "Working directory path relative to project root"
+          },
+          "dependsOn": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of task names that must successfully complete before this task starts"
+          },
+          "retries": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20,
+            "default": 0,
+            "description": "Number of retry attempts with exponential backoff on task failure"
+          },
+          "timeout": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Per-task maximum runtime in milliseconds before SIGTERM escalation"
+          },
+          "env": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Key-value dictionary of environment variables injected into the process"
+          },
+          "color": {
+            "type": "string",
+            "enum": ["cyan", "magenta", "yellow", "blue", "green", "red", "white", "gray"],
+            "description": "Terminal output prefix color theme for this task"
+          }
+        }
+      }
+    }
+  }
+}
