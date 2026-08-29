@@ -1,0 +1,28 @@
+{
+  "$schema": "./schema/zero.schema.json",
+  "version": "1.0.0",
+  "tasks": {
+    "lint": {
+      "command": "node -e \"console.log('Linting codebase: 0 errors');\""
+    },
+    "typecheck": {
+      "command": "node -e \"console.log('Typecheck passed: 0 errors');\""
+    },
+    "build": {
+      "command": "node -e \"console.log('Packaging build bundle...'); setTimeout(() => console.log('Bundle ready: 48KB'), 200);\"",
+      "dependsOn": ["lint", "typecheck"]
+    },
+    "test-unit": {
+      "command": "node -e \"console.log('Running unit tests...'); setTimeout(() => console.log('100% unit tests passed'), 150);\"",
+      "dependsOn": ["build"]
+    },
+    "test-e2e": {
+      "command": "node -e \"console.log('Running e2e integration suite...'); setTimeout(() => console.log('All e2e specs passed'), 300);\"",
+      "dependsOn": ["build"]
+    },
+    "deploy-staging": {
+      "command": "node -e \"console.log('Deploying to staging environment: success!');\"",
+      "dependsOn": ["test-unit", "test-e2e"]
+    }
+  }
+}
