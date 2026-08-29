@@ -1,0 +1,25 @@
+{
+  "$schema": "./schema/zero.schema.json",
+  "version": "1.0.0",
+  "tasks": {
+    "shared-types": {
+      "command": "node -e \"console.log('[shared-types] Generating TypeScript definitions...'); setTimeout(() => console.log('[shared-types] Typings generated'), 100);\""
+    },
+    "shared-utils": {
+      "command": "node -e \"console.log('[shared-utils] Building core utility library...'); setTimeout(() => console.log('[shared-utils] Build complete'), 150);\"",
+      "dependsOn": ["shared-types"]
+    },
+    "backend-service": {
+      "command": "node -e \"console.log('[backend] Compiling API server...'); setTimeout(() => console.log('[backend] Ready on port 8080'), 200);\"",
+      "dependsOn": ["shared-utils"]
+    },
+    "frontend-app": {
+      "command": "node -e \"console.log('[frontend] Building client bundle...'); setTimeout(() => console.log('[frontend] Ready on port 3000'), 250);\"",
+      "dependsOn": ["shared-utils"]
+    },
+    "docs-site": {
+      "command": "node -e \"console.log('[docs] Static site generator ready on port 4000');\"",
+      "dependsOn": ["shared-types"]
+    }
+  }
+}
