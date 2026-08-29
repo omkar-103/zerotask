@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "api":      { "command": "node demo/api.js", "env": { "PORT": "4000" } },
+    "worker":   { "command": "node demo/worker.js", "retries": 3, "env": { "CRASH_AFTER_MS": "4000" } },
+    "frontend": { "command": "node demo/frontend.js", "dependsOn": ["api"] }
+  },
+  "groups": {
+    "dev": { "tasks": ["api", "worker", "frontend"], "concurrencyLimit": 3 }
+  },
+  "shutdownTimeout": 3000
+}

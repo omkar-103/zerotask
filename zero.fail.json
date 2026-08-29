@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "api":      { "command": "node -e \"console.log('api failing on purpose'); process.exit(1)\"", "retries": 0 },
+    "frontend": { "command": "node demo/frontend.js", "dependsOn": ["api"] },
+    "analytics":{ "command": "node -e \"console.log('analytics running')\"", "dependsOn": ["frontend"] }
+  },
+  "groups": {
+    "cascade": { "tasks": ["api", "frontend", "analytics"] }
+  }
+}
