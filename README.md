@@ -1,5 +1,10 @@
 # ZeroTask
 
+[![CI](https://github.com/omkar-103/zerotask/actions/workflows/ci.yml/badge.svg)](https://github.com/omkar-103/zerotask/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](package.json)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-green.svg)](package.json)
+
 > Zero-dependency task runner and process orchestrator for Node.js.  
 > Built for the **Zero Dependency 2026** hackathon — Hackathon Raptors.
 
